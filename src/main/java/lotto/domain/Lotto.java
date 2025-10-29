@@ -8,12 +8,15 @@ import lotto.exception.LottoError;
 public class Lotto {
 
     private static final int FIXED_COUNT = 6;
+    private static final int MINIMUM_BOUND = 1;
+    private static final int MAXIMUM_BOUND = 45;
 
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         validateCountOf(numbers);
         validateUnique(numbers);
+        numbers.forEach(this::validateRange);
         this.numbers = numbers;
     }
 
@@ -28,6 +31,12 @@ public class Lotto {
 
         if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(LottoError.NUMBERS_ARE_NOT_UNIQUE.message());
+        }
+    }
+
+    private void validateRange(int number) {
+        if (number < MINIMUM_BOUND || number > MAXIMUM_BOUND) {
+            throw new IllegalArgumentException("");
         }
     }
 }
