@@ -9,7 +9,7 @@ public class RandomPicker {
     private static final int END_INCLUSIVE = 45;
     private static final int COUNT = 6;
 
-    public static List<Integer> uniqueNumbers() {
+    public List<Integer> uniqueNumbers() {
         return Randoms.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, COUNT);
     }
 }

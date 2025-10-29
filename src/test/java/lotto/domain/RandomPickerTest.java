@@ -10,8 +10,10 @@ public class RandomPickerTest {
 
     @Test
     void 지정된_갯수만큼의_난수를_반환한다() {
+        //given
+        RandomPicker picker = new RandomPicker();
         //when
-        List<Integer> numbers = RandomPicker.uniqueNumbers();
+        List<Integer> numbers = picker.uniqueNumbers();
         //then
         Assertions.assertEquals(numbers.size(), 6);
     }
@@ -19,7 +21,7 @@ public class RandomPickerTest {
     @Test
     void 반환된_난수들은_서로_중복되지_않는다() {
         //given
-        List<Integer> numbers = RandomPicker.uniqueNumbers();
+        List<Integer> numbers = new RandomPicker().uniqueNumbers();
         //when
         Set<Integer> toUnique = new HashSet<>(numbers);
         //then
