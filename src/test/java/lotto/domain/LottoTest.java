@@ -3,7 +3,8 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
+import lotto.exception.LottoError;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,10 @@ class LottoTest {
         }
 
         @Test
-        void 제한된_범위를_벗어난_숫자가_있으면_예외가_발생한다() {
-            Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> new Lotto(List.of(1, 1, 2, 3, 4, 5)));
+        void 제한된_범위를_벗어난_숫자가_있으면_범위를_안내하는_예외가_발생한다() {
+            Assertions.assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 100)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(LottoError.OUT_OF_BOUNDS.messageOf(1, 45));
         }
     }
 }
