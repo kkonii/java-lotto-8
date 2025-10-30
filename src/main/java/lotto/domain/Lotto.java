@@ -36,7 +36,7 @@ public class Lotto {
 
     private void validateRange(int number) {
         if (number < MINIMUM_BOUND || number > MAXIMUM_BOUND) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException(LottoError.OUT_OF_BOUNDS.messageOf(MINIMUM_BOUND, MAXIMUM_BOUND));
         }
     }
 }
