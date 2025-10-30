@@ -1,0 +1,31 @@
+package lotto.domain;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class LottoCalculator {
+
+    public int compareOf(Lotto lotto, WinningNumber winningNumber) {
+        List<Integer> lottoNumbers = lotto.asList();
+        List<Integer> winningNumbers = winningNumber.asList();
+
+        return findMatchingCount(lottoNumbers, winningNumbers);
+    }
+
+    private int findMatchingCount(List<Integer> lotto, List<Integer> winningNumbers) {
+        int summaryCount = lotto.size() + winningNumbers.size();
+        Set<Integer> uniqueNumbers = removeDuplicateOf(lotto, winningNumbers);
+
+        return summaryCount - uniqueNumbers.size();
+    }
+
+    private Set<Integer> removeDuplicateOf(List<Integer> lotto, List<Integer> winningNumbers) {
+        Set<Integer> removeDuplicate = new HashSet<>();
+
+        removeDuplicate.addAll(lotto);
+        removeDuplicate.addAll(winningNumbers);
+
+        return removeDuplicate;
+    }
+}

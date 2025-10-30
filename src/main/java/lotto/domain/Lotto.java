@@ -39,4 +39,8 @@ public class Lotto {
             throw new IllegalArgumentException(LottoError.OUT_OF_BOUNDS.messageOf(MINIMUM_BOUND, MAXIMUM_BOUND));
         }
     }
+
+    public List<Integer> asList() {
+        return List.copyOf(numbers);
+    }
 }
