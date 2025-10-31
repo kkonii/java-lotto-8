@@ -28,4 +28,11 @@ public class LottoCalculator {
 
         return removeDuplicate;
     }
+
+    public boolean matchValuesOf(Lotto lotto, BonusNumber bonusNumber) {
+        List<Integer> lottoNumbers = lotto.asList();
+        int numberValue = bonusNumber.getValue();
+
+        return lottoNumbers.contains(numberValue);
+    }
 }

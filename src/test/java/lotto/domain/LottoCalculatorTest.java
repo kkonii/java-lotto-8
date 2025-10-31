@@ -20,4 +20,19 @@ public class LottoCalculatorTest {
         //then
         Assertions.assertEquals(compared, matchingCount);
     }
+
+    @Test
+    void 로또_번호와_보너스_번호의_일치_여부를_반환한다() {
+        //given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = new BonusNumber(4);
+
+        //when
+        LottoCalculator calculator = new LottoCalculator();
+        boolean match = calculator.matchValuesOf(lotto, bonusNumber);
+
+        //then
+        org.assertj.core.api.Assertions.assertThat(match)
+                .isTrue();
+    }
 }

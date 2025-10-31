@@ -19,4 +19,8 @@ public class BonusNumber {
             throw new IllegalArgumentException(LottoError.OUT_OF_BOUNDS.messageOf(MINIMUM_BOUND, MAXIMUM_BOUND));
         }
     }
+
+    public int getValue() {
+        return number;
+    }
 }
