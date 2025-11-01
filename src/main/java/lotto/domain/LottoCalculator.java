@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class LottoCalculator {
@@ -34,5 +36,22 @@ public class LottoCalculator {
         int numberValue = bonusNumber.getValue();
 
         return lottoNumbers.contains(numberValue);
+    }
+
+    public int statisticsWith(Lotto lotto, WinningNumber winningNumber,
+                              BonusNumber bonusNumber) {
+        EnumMap<Rank, Integer> rankRepository = Rank.from();
+
+        int matchingCount = compareOf(lotto, winningNumber);
+        boolean matchBonus = matchValuesOf(lotto, bonusNumber);
+
+        Optional<Rank> rank = Rank.findBy(matchingCount, matchBonus);
+        if (rank.isPresent()) {
+            int repoCount = rankRepository.get(rank.get());
+            rankRepository.put(rank.get(), repoCount++);
+
+            return repoCount;
+        }
+        return 0;
     }
 }

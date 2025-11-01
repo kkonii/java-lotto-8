@@ -2,7 +2,10 @@ package lotto.domain;
 
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoCalculatorTest {
 
@@ -34,5 +37,22 @@ public class LottoCalculatorTest {
         //then
         org.assertj.core.api.Assertions.assertThat(match)
                 .isTrue();
+    }
+
+    @ParameterizedTest
+    @MethodSource("lotto.fixture.Provider#numberArgumentsOfRank")
+    @DisplayName("[성공] 로또 번호, 당첨번호, 보너스 번호를 비교해 당첨된 여부를 반환한다")
+    void 로또와_당첨_번호_보너스_번호에_대해_당첨_여부를_반환한다(List<Integer> lottoNumbers, List<Integer> winningNumbers, int numberValue,
+                                          Rank rank) {
+        //given
+        LottoCalculator calculator = new LottoCalculator();
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinningNumber winningNumber = new WinningNumber(winningNumbers);
+        BonusNumber bonusNumber = new BonusNumber(numberValue);
+
+        //when
+        int winningCount = calculator.statisticsWith(lotto, winningNumber, bonusNumber);
+        //then
+        Assertions.assertEquals(winningCount, 1);
     }
 }
