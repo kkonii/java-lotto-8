@@ -43,8 +43,8 @@ public class LottoCalculatorTest {
     @ParameterizedTest
     @MethodSource("lotto.fixture.Provider#numberArgumentsOfRank")
     @DisplayName("[성공] 로또 번호, 당첨번호, 보너스 번호를 비교해 당첨된 여부를 반환한다")
-    void 로또와_당첨_번호_보너스_번호에_대해_당첨_여부를_반환한다(List<Integer> lottoNumbers, List<Integer> winningNumbers, int numberValue,
-                                          Rank rank) {
+    void 로또와_당첨_번호_보너스_번호에_일치하는_등수를_찾아_반환한다(List<Integer> lottoNumbers, List<Integer> winningNumbers, int numberValue,
+                                            Rank rank) {
         //given
         LottoCalculator calculator = new LottoCalculator();
         Lotto lotto = new Lotto(lottoNumbers);
@@ -52,7 +52,7 @@ public class LottoCalculatorTest {
         BonusNumber bonusNumber = new BonusNumber(numberValue);
 
         //when
-        Optional<Rank> foundRank = calculator.statisticsWith(lotto, winningNumber, bonusNumber);
+        Optional<Rank> foundRank = calculator.findRankWith(lotto, winningNumber, bonusNumber);
         //then
         Assertions.assertEquals(foundRank.get(), rank);
     }
