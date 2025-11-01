@@ -38,8 +38,8 @@ public class LottoCalculator {
         return lottoNumbers.contains(numberValue);
     }
 
-    public int statisticsWith(Lotto lotto, WinningNumber winningNumber,
-                              BonusNumber bonusNumber) {
+    public Optional<Rank> statisticsWith(Lotto lotto, WinningNumber winningNumber,
+                                         BonusNumber bonusNumber) {
         EnumMap<Rank, Integer> rankRepository = Rank.from();
 
         int matchingCount = compareOf(lotto, winningNumber);
@@ -47,11 +47,8 @@ public class LottoCalculator {
 
         Optional<Rank> rank = Rank.findBy(matchingCount, matchBonus);
         if (rank.isPresent()) {
-            int repoCount = rankRepository.get(rank.get());
-            rankRepository.put(rank.get(), repoCount++);
-
-            return repoCount;
+            rankRepository.merge(rank.get(), 1, Integer::sum);
         }
-        return 0;
+        return rank;
     }
 }

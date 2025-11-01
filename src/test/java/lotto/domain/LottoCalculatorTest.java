@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,8 +52,8 @@ public class LottoCalculatorTest {
         BonusNumber bonusNumber = new BonusNumber(numberValue);
 
         //when
-        int winningCount = calculator.statisticsWith(lotto, winningNumber, bonusNumber);
+        Optional<Rank> foundRank = calculator.statisticsWith(lotto, winningNumber, bonusNumber);
         //then
-        Assertions.assertEquals(winningCount, 1);
+        Assertions.assertEquals(foundRank.get(), rank);
     }
 }
