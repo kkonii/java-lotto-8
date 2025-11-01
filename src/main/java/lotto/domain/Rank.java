@@ -12,8 +12,6 @@ public enum Rank {
     SECOND(30_000_000, 5),
     FIRST(2_000_000_000, 6);
 
-    private static final EnumMap<Rank, Integer> RANK_REPOSITORY = new EnumMap<>(Rank.class);
-
     private final int prizeMoney;
     private final int matchingCount;
 
@@ -44,10 +42,12 @@ public enum Rank {
     }
 
     public static EnumMap<Rank, Integer> from() {
+        EnumMap<Rank, Integer> repository = new EnumMap<>(Rank.class);
+
         for (Rank rank : Rank.values()) {
-            RANK_REPOSITORY.put(rank, 0);
+            repository.put(rank, 0);
         }
 
-        return RANK_REPOSITORY;
+        return repository;
     }
 }
