@@ -26,7 +26,7 @@ public class LotteryServiceTest {
         BonusNumber bonusNumber = new BonusNumber(numberValue);
 
         //when
-        EnumMap<Rank, Integer> statistics = service.statisticsWith(lotto, winningNumber, bonusNumber);
+        EnumMap<Rank, Integer> statistics = service.statisticsWith(List.of(lotto), winningNumber, bonusNumber);
 
         //then
         Assertions.assertThat(statistics.get(rank)).isEqualTo(1);

@@ -1,6 +1,7 @@
 package lotto.service;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Optional;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
@@ -16,14 +17,15 @@ public class LotteryService {
         this.lottoCalculator = lottoCalculator;
     }
 
-    public EnumMap<Rank, Integer> statisticsWith(Lotto lotto, WinningNumber winningNumbers, BonusNumber bonus) {
+    public EnumMap<Rank, Integer> statisticsWith(List<Lotto> lottos, WinningNumber winningNumbers, BonusNumber bonus) {
         EnumMap<Rank, Integer> rankRepository = Rank.from();
 
-        Optional<Rank> rank = lottoCalculator.findRankWith(lotto, winningNumbers, bonus);
-        if (rank.isPresent()) {
-            rankRepository.merge(rank.get(), 1, Integer::sum);
-        }
-
+        lottos.forEach(lotto -> {
+            Optional<Rank> rank = lottoCalculator.findRankWith(lotto, winningNumbers, bonus);
+            if (rank.isPresent()) {
+                rankRepository.merge(rank.get(), 1, Integer::sum);
+            }
+        });
         return rankRepository;
     }
 }
