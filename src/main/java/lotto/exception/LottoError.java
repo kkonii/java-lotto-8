@@ -2,6 +2,8 @@ package lotto.exception;
 
 public enum LottoError {
 
+    AMOUNT_BELOW_MINIMUM("구매금액은 최소 %,d원이어야 합니다."),
+
     NUMBER_COUNTS_ARE_NOT_MATCH("번호의 갯수는 %d개여야 합니다."),
     NUMBERS_ARE_NOT_UNIQUE("번호는 서로 중복되지 않아야 합니다."),
     OUT_OF_BOUNDS("번호는 %d에서 %d 사이의 숫자여야 합니다.");
