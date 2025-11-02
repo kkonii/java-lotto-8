@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
@@ -55,5 +56,16 @@ public class LottoCalculatorTest {
         Optional<Rank> foundRank = calculator.findRankWith(lotto, winningNumber, bonusNumber);
         //then
         Assertions.assertEquals(foundRank.get(), rank);
+    }
+
+    @ParameterizedTest
+    @MethodSource("lotto.fixture.Provider#argumentsOfStatistics")
+    void 당첨_통계에_대한_수익률을_반환한다(EnumMap<Rank, Integer> statistics, float expectedRate) {
+        //given
+        LottoCalculator calculator = new LottoCalculator();
+        //when
+        float actualRate = calculator.profitRate(8_000, statistics);
+        //then
+        Assertions.assertEquals(expectedRate, actualRate);
     }
 }

@@ -50,4 +50,8 @@ public enum Rank {
 
         return repository;
     }
+
+    public int prizeMoney() {
+        return prizeMoney;
+    }
 }

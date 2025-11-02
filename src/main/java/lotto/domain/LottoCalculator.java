@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -43,5 +44,14 @@ public class LottoCalculator {
         boolean matchBonus = matchValuesOf(lotto, bonusNumber);
 
         return Rank.findBy(matchingCount, matchBonus);
+    }
+
+    public float profitRate(int purchaseAmount, EnumMap<Rank, Integer> winningStatistics) {
+        long prize = winningStatistics.entrySet()
+                .stream()
+                .mapToLong(statistic -> (long) statistic.getKey().prizeMoney() * statistic.getValue())
+                .sum();
+
+        return (float) prize / purchaseAmount * 100;
     }
 }
