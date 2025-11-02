@@ -29,4 +29,16 @@ public class PurchaseAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoError.NOT_REQUIRED_AMOUNT_UNIT.messageOf(amountUnit));
     }
+
+    @Test
+    void 구매금액이_최대를_초과하면_예외를_반환한다() {
+        //given
+        int maximumBound = 100_000;
+        //when
+        int actualAmount = 205_000;
+        //then
+        Assertions.assertThatThrownBy(() -> new PurchaseAmount(actualAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContainingAll(LottoError.AMOUNT_EXCEED_MAXIMUM.messageOf(maximumBound));
+    }
 }
