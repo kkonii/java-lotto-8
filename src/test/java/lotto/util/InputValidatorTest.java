@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputValidatorTest {
@@ -13,20 +14,46 @@ public class InputValidatorTest {
     @DisplayName("[검증] 예외 발생 테스트")
     class validation_error {
 
-        @ParameterizedTest
-        @ValueSource(strings = {"char", "number", "숫자", "###", "☺️"})
-        void 숫자_형식이_아닌_값에_대해_예외를_발생한다(String value) {
-            Assertions.assertThatThrownBy(() -> InputValidator.numericType(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(GlobalError.NOT_A_NUMBER.message());
+        @Nested
+        @DisplayName("형식과 범위에 대한 예외")
+        class 형식_범위 {
+
+            @ParameterizedTest
+            @ValueSource(strings = {"char", "number", "숫자", "###", "☺️"})
+            void 숫자_형식이_아닌_값에_대해_예외를_발생한다(String value) {
+                Assertions.assertThatThrownBy(() -> InputValidator.numericType(value))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(GlobalError.NOT_A_NUMBER.message());
+            }
+
+            @ParameterizedTest
+            @ValueSource(strings = {"-2147483649", "1000000000000000"})
+            void 정수_범위를_벗어난_값에_대해_예외를_발생한다(String value) {
+                Assertions.assertThatThrownBy(() -> InputValidator.rangeOf(value))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContainingAll(GlobalError.OUT_OF_INTEGER_RANGE.message());
+            }
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {"-2147483649", "1000000000000000"})
-        void 정수_범위를_벗어난_값에_대해_예외를_발생한다(String value) {
-            Assertions.assertThatThrownBy(() -> InputValidator.rangeOf(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContainingAll(GlobalError.OUT_OF_INTEGER_RANGE.message());
+        @Nested
+        @DisplayName("공백과 null에 대한 예외")
+        class 비어있는_값 {
+
+            @ParameterizedTest
+            @ValueSource(strings = {"   ", "", "\t", "\n"})
+            void 공백으로_이루어진_값에_대해_예외를_발생한다(String value) {
+                Assertions.assertThatThrownBy(() -> InputValidator.blankValue(value))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContainingAll(GlobalError.INPUT_IS_BLANK.message());
+            }
+
+            @ParameterizedTest
+            @NullSource
+            void null_값에_대해_예외를_발생한다(String value) {
+                Assertions.assertThatThrownBy(() -> InputValidator.blankValue(value))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContainingAll(GlobalError.INPUT_IS_BLANK.message());
+            }
         }
     }
 

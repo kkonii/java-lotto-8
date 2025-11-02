@@ -26,4 +26,11 @@ public final class InputValidator {
             throw new IllegalArgumentException(GlobalError.OUT_OF_INTEGER_RANGE.message());
         }
     }
+
+    public static void blankValue(String value) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException(GlobalError.INPUT_IS_BLANK.message());
+        }
+    }
+
 }
