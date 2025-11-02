@@ -17,4 +17,16 @@ public class PurchaseAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoError.AMOUNT_BELOW_MINIMUM.messageOf(minimumAmount));
     }
+
+    @Test
+    void 구매금액_단위가_1000원이_아니면_예외를_반환한다() {
+        //given
+        int amountUnit = 1000;
+        //when
+        int actualAmount = 1500;
+        //then
+        Assertions.assertThatThrownBy(() -> new PurchaseAmount(actualAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(LottoError.NOT_REQUIRED_AMOUNT_UNIT.messageOf(amountUnit));
+    }
 }
