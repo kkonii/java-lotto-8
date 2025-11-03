@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import java.util.EnumMap;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoCalculatorTest {
 
@@ -37,16 +34,5 @@ public class LottoCalculatorTest {
         //then
         org.assertj.core.api.Assertions.assertThat(match)
                 .isTrue();
-    }
-
-    @ParameterizedTest
-    @MethodSource("lotto.fixture.Provider#argumentsOfStatistics")
-    void 당첨_통계에_대한_수익률을_반환한다(EnumMap<Rank, Integer> statistics, float expectedRate) {
-        //given
-        LottoCalculator calculator = new LottoCalculator();
-        //when
-        float actualRate = calculator.profitRate(8_000, statistics);
-        //then
-        Assertions.assertEquals(expectedRate, actualRate, 0.0001f);
     }
 }

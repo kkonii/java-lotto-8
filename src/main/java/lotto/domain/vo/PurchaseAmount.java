@@ -39,4 +39,8 @@ public class PurchaseAmount {
     public int toTicketCount() {
         return amount / UNIT_AMOUNT;
     }
+
+    public int getValue() {
+        return amount;
+    }
 }

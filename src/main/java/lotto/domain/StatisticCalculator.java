@@ -21,4 +21,13 @@ public class StatisticCalculator {
 
         return repository;
     }
+
+    public float profitRate(int purchaseAmount, EnumMap<Rank, Integer> winningStatistics) {
+        long prize = winningStatistics.entrySet()
+                .stream()
+                .mapToLong(statistic -> (long) statistic.getKey().prizeMoney() * statistic.getValue())
+                .sum();
+
+        return (float) prize / purchaseAmount * 100;
+    }
 }

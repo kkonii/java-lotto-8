@@ -10,6 +10,9 @@ import lotto.domain.LottoCalculator;
 import lotto.domain.Rank;
 import lotto.domain.StatisticCalculator;
 import lotto.domain.WinningNumber;
+import lotto.domain.vo.PurchaseAmount;
+import lotto.dto.StatisticDto;
+import lotto.dto.mapper.DtoMapper;
 
 public class LotteryService {
 
@@ -21,7 +24,8 @@ public class LotteryService {
         this.statisticCalculator = statisticCalculator;
     }
 
-    public EnumMap<Rank, Integer> statisticsWith(List<Lotto> lottos, WinningNumber winningNumbers, BonusNumber bonus) {
+    public StatisticDto statisticsWith(PurchaseAmount purchaseAmount, List<Lotto> lottos,
+                                       WinningNumber winningNumbers, BonusNumber bonus) {
         List<Rank> ranks = new ArrayList<>();
 
         lottos.forEach(lotto -> {
@@ -31,7 +35,10 @@ public class LotteryService {
             }
         });
 
-        return statisticCalculator.summarizeCountOf(ranks);
+        EnumMap<Rank, Integer> statisticSummary = statisticCalculator.summarizeCountOf(ranks);
+        float profitRate = statisticCalculator.profitRate(purchaseAmount.getValue(), statisticSummary);
+
+        return DtoMapper.from(statisticSummary, profitRate);
     }
 
     public Optional<Rank> findRankWith(Lotto lotto, WinningNumber winningNumber,
