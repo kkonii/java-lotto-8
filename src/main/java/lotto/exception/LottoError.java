@@ -22,11 +22,7 @@ public enum LottoError {
         return message;
     }
 
-    public String messageOf(int number) {
-        return String.format(message, number);
-    }
-
-    public String messageOf(int startInclusive, int endInclusive) {
-        return String.format(message, startInclusive, endInclusive);
+    public String messageOf(Object... args) {
+        return String.format(message, args);
     }
 }

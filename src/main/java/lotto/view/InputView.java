@@ -15,7 +15,6 @@ public class InputView {
     }
 
     public String getWinningNumberInput() {
-        System.out.println();
         System.out.println(ENTER_WINNING_NUMBER);
 
         return Console.readLine();
