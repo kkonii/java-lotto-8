@@ -51,7 +51,7 @@ public class OutputView {
         printProfitRate(dto.profitRate());
     }
 
-    private void printProfitRate(float value) {
+    private void printProfitRate(double value) {
         System.out.printf(PROFIT_RATE_IS, value);
     }
 }

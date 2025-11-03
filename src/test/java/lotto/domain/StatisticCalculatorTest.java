@@ -26,11 +26,11 @@ public class StatisticCalculatorTest {
 
     @ParameterizedTest
     @MethodSource("lotto.fixture.Provider#argumentsOfStatistics")
-    void 당첨_통계에_대한_수익률을_반환한다(EnumMap<Rank, Integer> statistics, float expectedRate) {
+    void 당첨_통계에_대한_수익률을_반환한다(EnumMap<Rank, Integer> statistics, double expectedRate) {
         //given
         StatisticCalculator calculator = new StatisticCalculator();
         //when
-        float actualRate = calculator.profitRate(8_000, statistics);
+        double actualRate = calculator.profitRate(8_000, statistics);
         //then
         Assertions.assertEquals(expectedRate, actualRate, 0.0001f);
     }

@@ -19,7 +19,7 @@ public class DtoMapper {
         return new LottoDto(lotto.sortByAscending());
     }
 
-    public static StatisticDto from(EnumMap<Rank, Integer> statistic, float rate) {
+    public static StatisticDto from(EnumMap<Rank, Integer> statistic, double rate) {
         return new StatisticDto(statistic, rate);
     }
 }

@@ -34,20 +34,20 @@ public class Provider {
         EnumMap<Rank, Integer> statistic1 = new EnumMap<>(Rank.class);
         statistic1.put(Rank.FIRST, 1);
         int prizeSummary1 = 2_000_000_000;
-        float profitRate1 = (float) prizeSummary1 / purchaseAmount * 100;
+        double profitRate1 = (double) prizeSummary1 / purchaseAmount * 100;
 
         //두 번째 통계
         EnumMap<Rank, Integer> statistic2 = new EnumMap<>(Rank.class);
         statistic2.put(Rank.THIRD, 1);
         statistic2.put(Rank.FOURTH, 1);
         int prizeSummary2 = 1_550_000;
-        float profitRate2 = (float) prizeSummary2 / purchaseAmount * 100;
+        double profitRate2 = (double) prizeSummary2 / purchaseAmount * 100;
 
         //세 번째 통계
         EnumMap<Rank, Integer> statistic3 = new EnumMap<>(Rank.class);
         statistic3.put(Rank.FIFTH, 1);
         int prizeSummary3 = 5_000;
-        float profitRate3 = (float) prizeSummary3 / purchaseAmount * 100;
+        double profitRate3 = (double) prizeSummary3 / purchaseAmount * 100;
 
         return Stream.of(
                 Arguments.of(statistic1, profitRate1),

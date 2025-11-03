@@ -34,7 +34,7 @@ public class LotteryService {
         });
 
         EnumMap<Rank, Integer> statisticSummary = statisticCalculator.summarizeCountOf(ranks);
-        float profitRate = statisticCalculator.profitRate(purchaseAmount.getValue(), statisticSummary);
+        double profitRate = statisticCalculator.profitRate(purchaseAmount.getValue(), statisticSummary);
 
         return DtoMapper.from(statisticSummary, profitRate);
     }
