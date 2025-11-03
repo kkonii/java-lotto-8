@@ -21,11 +21,19 @@ public class LotteryService {
         EnumMap<Rank, Integer> rankRepository = Rank.from();
 
         lottos.forEach(lotto -> {
-            Optional<Rank> rank = lottoCalculator.findRankWith(lotto, winningNumbers, bonus);
+            Optional<Rank> rank = findRankWith(lotto, winningNumbers, bonus);
             if (rank.isPresent()) {
                 rankRepository.merge(rank.get(), 1, Integer::sum);
             }
         });
         return rankRepository;
+    }
+
+    public Optional<Rank> findRankWith(Lotto lotto, WinningNumber winningNumber,
+                                       BonusNumber bonusNumber) {
+        int matchingCount = lottoCalculator.findMatchingCount(lotto, winningNumber);
+        boolean matchBonus = lottoCalculator.matchValuesOf(lotto, bonusNumber);
+
+        return Rank.findBy(matchingCount, matchBonus);
     }
 }

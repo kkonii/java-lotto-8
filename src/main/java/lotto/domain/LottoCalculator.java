@@ -3,21 +3,16 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public class LottoCalculator {
 
-    public int compareOf(Lotto lotto, WinningNumber winningNumber) {
+    public int findMatchingCount(Lotto lotto, WinningNumber winningNumber) {
         List<Integer> lottoNumbers = lotto.asList();
         List<Integer> winningNumbers = winningNumber.asList();
 
-        return findMatchingCount(lottoNumbers, winningNumbers);
-    }
-
-    private int findMatchingCount(List<Integer> lotto, List<Integer> winningNumbers) {
-        int summaryCount = lotto.size() + winningNumbers.size();
-        Set<Integer> uniqueNumbers = removeDuplicateOf(lotto, winningNumbers);
+        int summaryCount = lottoNumbers.size() + winningNumbers.size();
+        Set<Integer> uniqueNumbers = removeDuplicateOf(lottoNumbers, winningNumbers);
 
         return summaryCount - uniqueNumbers.size();
     }
@@ -36,14 +31,6 @@ public class LottoCalculator {
         int numberValue = bonusNumber.getValue();
 
         return lottoNumbers.contains(numberValue);
-    }
-
-    public Optional<Rank> findRankWith(Lotto lotto, WinningNumber winningNumber,
-                                       BonusNumber bonusNumber) {
-        int matchingCount = compareOf(lotto, winningNumber);
-        boolean matchBonus = matchValuesOf(lotto, bonusNumber);
-
-        return Rank.findBy(matchingCount, matchBonus);
     }
 
     public float profitRate(int purchaseAmount, EnumMap<Rank, Integer> winningStatistics) {

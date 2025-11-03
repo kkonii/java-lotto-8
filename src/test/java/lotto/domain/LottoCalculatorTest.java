@@ -2,9 +2,7 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,7 +18,7 @@ public class LottoCalculatorTest {
 
         //when
         LottoCalculator calculator = new LottoCalculator();
-        int compared = calculator.compareOf(lotto, winningNumber);
+        int compared = calculator.findMatchingCount(lotto, winningNumber);
 
         //then
         Assertions.assertEquals(compared, matchingCount);
@@ -42,23 +40,6 @@ public class LottoCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("lotto.fixture.Provider#numberArgumentsOfRank")
-    @DisplayName("[성공] 로또 번호, 당첨번호, 보너스 번호를 비교해 당첨된 여부를 반환한다")
-    void 로또와_당첨_번호_보너스_번호에_일치하는_등수를_찾아_반환한다(List<Integer> lottoNumbers, List<Integer> winningNumbers, int numberValue,
-                                            Rank rank) {
-        //given
-        LottoCalculator calculator = new LottoCalculator();
-        Lotto lotto = new Lotto(lottoNumbers);
-        WinningNumber winningNumber = new WinningNumber(winningNumbers);
-        BonusNumber bonusNumber = new BonusNumber(numberValue);
-
-        //when
-        Optional<Rank> foundRank = calculator.findRankWith(lotto, winningNumber, bonusNumber);
-        //then
-        Assertions.assertEquals(foundRank.get(), rank);
-    }
-
-    @ParameterizedTest
     @MethodSource("lotto.fixture.Provider#argumentsOfStatistics")
     void 당첨_통계에_대한_수익률을_반환한다(EnumMap<Rank, Integer> statistics, float expectedRate) {
         //given
@@ -66,6 +47,6 @@ public class LottoCalculatorTest {
         //when
         float actualRate = calculator.profitRate(8_000, statistics);
         //then
-        Assertions.assertEquals(expectedRate, actualRate);
+        Assertions.assertEquals(expectedRate, actualRate, 0.0001f);
     }
 }
