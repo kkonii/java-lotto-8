@@ -1,7 +1,9 @@
 package lotto.domain.rule;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Optional;
+import java.util.Set;
 
 public enum Rank {
 
@@ -10,6 +12,8 @@ public enum Rank {
     THIRD(1_500_000, 5),
     SECOND(30_000_000, 5),
     FIRST(2_000_000_000, 6);
+
+    private static final Set<Rank> BONUS_MATCH_REQUIRED_RANKS = EnumSet.of(SECOND, THIRD);
 
     private final int prizeMoney;
     private final int matchingCount;
@@ -22,18 +26,18 @@ public enum Rank {
     public static Optional<Rank> findBy(int count, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchingCount == count)
-                .map(rank -> matchBy(rank, matchBonus))
+                .map(rank -> adjustByBonusMatch(rank, matchBonus))
                 .findFirst();
     }
 
-    private static Rank matchBy(Rank rank, boolean matchBonus) {
-        if (rank == SECOND || rank == THIRD) {
-            return findBy(matchBonus);
+    private static Rank adjustByBonusMatch(Rank rank, boolean matchBonus) {
+        if (BONUS_MATCH_REQUIRED_RANKS.contains(rank)) {
+            return determineBy(matchBonus);
         }
         return rank;
     }
 
-    private static Rank findBy(boolean matchBonus) {
+    private static Rank determineBy(boolean matchBonus) {
         if (matchBonus) {
             return SECOND;
         }
