@@ -10,14 +10,16 @@ public final class Parser {
     private Parser() {
     }
 
-    public static int toInteger(String value) {
-        InputValidator.numericType(value);
-        InputValidator.rangeOf(value);
+    public static int toInteger(String consoleInput) {
+        InputValidator.blankValue(consoleInput);
+        InputValidator.numericType(consoleInput);
+        InputValidator.rangeOf(consoleInput);
 
-        return Integer.parseInt(value);
+        return Integer.parseInt(consoleInput);
     }
 
     public static List<Integer> toNumbers(String consoleInput) {
+        InputValidator.blankValue(consoleInput);
         InputValidator.numberInputFormat(consoleInput);
 
         return Arrays.stream(consoleInput.split(DELIMITER))
