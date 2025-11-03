@@ -7,12 +7,10 @@ public enum GlobalError {
     INPUT_IS_BLANK("입력값이 비어있습니다."),
     NUMBER_INPUT_FORMAT_IS_NOT_VALID("올바르지 않은 형식입니다. 숫자와 ,로 구분하여 입력해 주세요.");
 
-    private static final String HEADER = "[ERROR] ";
-
     private final String message;
 
     GlobalError(String message) {
-        this.message = HEADER.concat(message);
+        this.message = message;
     }
 
     public String message() {
