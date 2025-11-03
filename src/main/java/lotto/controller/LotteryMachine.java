@@ -36,7 +36,7 @@ public class LotteryMachine {
         List<Lotto> randomLottos = retryHandler.run(() -> createRandomLottos(purchaseAmount));
 
         WinningNumber winningNumber = retryHandler.run(this::requestWinningNumber);
-        BonusNumber bonus = retryHandler.run(this::requestBonus);
+        BonusNumber bonus = retryHandler.run(() -> requestBonus(winningNumber));
 
         StatisticDto statistic = lotteryService.statisticsWith(purchaseAmount, randomLottos, winningNumber, bonus);
         outputView.printHeader();
@@ -67,10 +67,10 @@ public class LotteryMachine {
         return new WinningNumber(parsedNumbers);
     }
 
-    private BonusNumber requestBonus() {
+    private BonusNumber requestBonus(WinningNumber winningNumber) {
         String numberInput = inputView.getBonusInput();
         int parsedNumber = Parser.toInteger(numberInput);
 
-        return new BonusNumber(parsedNumber);
+        return BonusNumber.uniqueFrom(winningNumber, parsedNumber);
     }
 }
