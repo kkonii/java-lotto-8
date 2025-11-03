@@ -6,6 +6,7 @@ import lotto.exception.GlobalError;
 
 public final class InputValidator {
 
+    private static final Pattern NUMBER_INPUT_FORMAT_PATTERN = Pattern.compile("^[+-]?\\d+(,[+-]?\\d+)*$");
     private static final Pattern NUMERIC = Pattern.compile("^[+-]?\\d+$");
 
     private InputValidator() {
@@ -33,4 +34,11 @@ public final class InputValidator {
         }
     }
 
+    public static void numberInputFormat(String consoleInput) {
+        Matcher matcher = NUMBER_INPUT_FORMAT_PATTERN.matcher(consoleInput.strip());
+
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(GlobalError.NUMBER_INPUT_FORMAT_IS_NOT_VALID.message());
+        }
+    }
 }

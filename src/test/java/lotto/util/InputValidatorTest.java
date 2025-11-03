@@ -55,6 +55,19 @@ public class InputValidatorTest {
                         .hasMessageContainingAll(GlobalError.INPUT_IS_BLANK.message());
             }
         }
+
+        @Nested
+        @DisplayName("당첨 번호 입력 형식에 대한 예외")
+        class 번호_입력_형식 {
+
+            @ParameterizedTest
+            @ValueSource(strings = {",1,2", "2,", "3, 4, 6", "5, 6,,"})
+            void 올바르지_않은_형식의_값에_대해_예외를_발생한다(String value) {
+                Assertions.assertThatThrownBy(() -> InputValidator.numberInputFormat(value))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(GlobalError.NUMBER_INPUT_FORMAT_IS_NOT_VALID.message());
+            }
+        }
     }
 
     @Nested
@@ -70,7 +83,13 @@ public class InputValidatorTest {
         @ParameterizedTest
         @ValueSource(strings = {"-12", "+2", "0", "54"})
         void 숫자_형식의_입력값은_검증을_통과한다(String value) {
-            org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> InputValidator.rangeOf(value));
+            org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> InputValidator.numericType(value));
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"1,2,3", "4", " 5,6 "})
+        void 올바른_형식의_당첨번호_입력은_검증을_통과한다(String value) {
+            org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> InputValidator.numberInputFormat(value));
         }
     }
 }
