@@ -2,6 +2,7 @@ package lotto.fixture;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 import lotto.domain.Rank;
 import org.junit.jupiter.params.provider.Arguments;
@@ -50,6 +51,20 @@ public class Provider {
                 Arguments.of(statistic1, profitRate1),
                 Arguments.of(statistic2, profitRate2),
                 Arguments.of(statistic3, profitRate3)
+        );
+    }
+
+    public static Stream<Arguments> argumentsCountOfRank() {
+        return Stream.of(
+                //1등: 1회, 2등: 1회, 5등 :1회
+                Arguments.of(List.of(Rank.FIRST, Rank.SECOND, Rank.FIFTH),
+                        Map.of(Rank.FIRST, 1, Rank.SECOND, 1, Rank.THIRD, 0, Rank.FOURTH, 0, Rank.FIFTH, 1)),
+                //1등: 1회, 4등: 1회, 3등 :1회
+                Arguments.of(List.of(Rank.FIRST, Rank.THIRD, Rank.THIRD, Rank.FOURTH),
+                        Map.of(Rank.FIRST, 1, Rank.SECOND, 0, Rank.THIRD, 2, Rank.FOURTH, 1, Rank.FIFTH, 0)),
+                //2등 : 3회
+                Arguments.of(List.of(Rank.SECOND, Rank.SECOND, Rank.SECOND),
+                        Map.of(Rank.FIRST, 0, Rank.SECOND, 3, Rank.THIRD, 0, Rank.FOURTH, 0, Rank.FIFTH, 0))
         );
     }
 }

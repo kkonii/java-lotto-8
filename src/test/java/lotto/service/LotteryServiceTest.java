@@ -7,6 +7,7 @@ import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
 import lotto.domain.Rank;
+import lotto.domain.StatisticCalculator;
 import lotto.domain.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,8 @@ public class LotteryServiceTest {
                             Rank rank) {
         //given
         LottoCalculator calculator = new LottoCalculator();
-        LotteryService service = new LotteryService(calculator);
+        StatisticCalculator statistic = new StatisticCalculator();
+        LotteryService service = new LotteryService(calculator, statistic);
 
         Lotto lotto = new Lotto(lottoNumbers);
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
@@ -42,7 +44,8 @@ public class LotteryServiceTest {
                                             Rank rank) {
         //given
         LottoCalculator calculator = new LottoCalculator();
-        LotteryService service = new LotteryService(calculator);
+        StatisticCalculator statistic = new StatisticCalculator();
+        LotteryService service = new LotteryService(calculator, statistic);
 
         //when
         Lotto lotto = new Lotto(lottoNumbers);
