@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.Optional;
 
 public enum Rank {
@@ -39,16 +38,6 @@ public enum Rank {
             return SECOND;
         }
         return THIRD;
-    }
-
-    public static EnumMap<Rank, Integer> from() {
-        EnumMap<Rank, Integer> repository = new EnumMap<>(Rank.class);
-
-        for (Rank rank : Rank.values()) {
-            repository.put(rank, 0);
-        }
-
-        return repository;
     }
 
     public int prizeMoney() {
