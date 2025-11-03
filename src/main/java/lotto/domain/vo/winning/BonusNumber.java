@@ -1,12 +1,10 @@
 package lotto.domain.vo.winning;
 
 import java.util.List;
+import lotto.domain.rule.LotteryPolicy;
 import lotto.exception.LottoError;
 
-public class BonusNumber {
-
-    private static final int MINIMUM_BOUND = 1;
-    private static final int MAXIMUM_BOUND = 45;
+public class BonusNumber extends LotteryPolicy {
 
     private final int number;
 
@@ -19,12 +17,6 @@ public class BonusNumber {
         validateDuplicateOf(numbers, number);
 
         return new BonusNumber(number);
-    }
-
-    private void validateRange(int number) {
-        if (number < MINIMUM_BOUND || number > MAXIMUM_BOUND) {
-            throw new IllegalArgumentException(LottoError.OUT_OF_BOUNDS.messageOf(MINIMUM_BOUND, MAXIMUM_BOUND));
-        }
     }
 
     private static void validateDuplicateOf(WinningNumber numbers, int bonus) {
