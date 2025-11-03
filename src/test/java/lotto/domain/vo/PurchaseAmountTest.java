@@ -41,4 +41,16 @@ public class PurchaseAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContainingAll(LottoError.AMOUNT_EXCEED_MAXIMUM.messageOf(maximumBound));
     }
+
+    @Test
+    void 구매금액을_받아_발매할_갯수를_반환한다() {
+        //given
+        int purchaseAmountInput = 5000;
+        int countToBuy = 5;
+        //when
+        PurchaseAmount purchaseAmount = new PurchaseAmount(purchaseAmountInput);
+        int actualCount = purchaseAmount.toTicketCount();
+        //then
+        org.junit.jupiter.api.Assertions.assertEquals(actualCount, countToBuy);
+    }
 }

@@ -35,4 +35,8 @@ public class PurchaseAmount {
             throw new IllegalArgumentException(LottoError.AMOUNT_EXCEED_MAXIMUM.messageOf(MAXIMUM_BOUND));
         }
     }
+
+    public int toTicketCount() {
+        return amount / UNIT_AMOUNT;
+    }
 }
