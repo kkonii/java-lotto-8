@@ -1,10 +1,13 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.domain.vo.lotto.Lotto;
+import lotto.domain.vo.winning.BonusNumber;
+import lotto.domain.vo.winning.WinningNumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LottoCalculatorTest {
+public class LottoMatcherTest {
 
     @Test
     void 로또와_당첨_번호가_일치하는_갯수를_반환한다() {
@@ -14,8 +17,8 @@ public class LottoCalculatorTest {
         int matchingCount = 3;
 
         //when
-        LottoCalculator calculator = new LottoCalculator();
-        int compared = calculator.findMatchingCount(lotto, winningNumber);
+        LottoMatcher matcher = new LottoMatcher();
+        int compared = matcher.findMatchingCount(lotto, winningNumber);
 
         //then
         Assertions.assertEquals(compared, matchingCount);
@@ -28,8 +31,8 @@ public class LottoCalculatorTest {
         BonusNumber bonusNumber = new BonusNumber(4);
 
         //when
-        LottoCalculator calculator = new LottoCalculator();
-        boolean match = calculator.matchValuesOf(lotto, bonusNumber);
+        LottoMatcher matcher = new LottoMatcher();
+        boolean match = matcher.containValueOf(lotto, bonusNumber);
 
         //then
         org.assertj.core.api.Assertions.assertThat(match)

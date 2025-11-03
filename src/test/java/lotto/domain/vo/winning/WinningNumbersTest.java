@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.domain.vo.winning;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lotto.domain.vo.lotto.Lotto;
 import lotto.exception.LottoError;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

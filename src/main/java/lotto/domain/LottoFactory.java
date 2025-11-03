@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.rule.RandomPicker;
+import lotto.domain.vo.lotto.Lotto;
 
 public class LottoFactory {
 

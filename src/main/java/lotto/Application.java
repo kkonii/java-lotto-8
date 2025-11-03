@@ -2,10 +2,10 @@ package lotto;
 
 import lotto.controller.LotteryMachine;
 import lotto.controller.RetryHandler;
-import lotto.domain.LottoCalculator;
 import lotto.domain.LottoFactory;
-import lotto.domain.RandomPicker;
+import lotto.domain.LottoMatcher;
 import lotto.domain.StatisticCalculator;
+import lotto.domain.rule.RandomPicker;
 import lotto.service.LotteryService;
 import lotto.view.ConsoleErrorView;
 import lotto.view.InputView;
@@ -16,9 +16,9 @@ public class Application {
         RandomPicker picker = new RandomPicker();
         LottoFactory lottoFactory = new LottoFactory(picker);
 
-        LottoCalculator lottoCalculator = new LottoCalculator();
+        LottoMatcher lottoMatcher = new LottoMatcher();
         StatisticCalculator statistics = new StatisticCalculator();
-        LotteryService lotteryService = new LotteryService(lottoCalculator, statistics);
+        LotteryService lotteryService = new LotteryService(lottoMatcher, statistics);
 
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();

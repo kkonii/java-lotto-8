@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.domain.rule.RandomPicker;
+import lotto.domain.vo.lotto.Lotto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

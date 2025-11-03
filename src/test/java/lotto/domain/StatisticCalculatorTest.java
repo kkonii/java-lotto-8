@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.rule.Rank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

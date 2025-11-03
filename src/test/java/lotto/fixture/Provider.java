@@ -4,12 +4,13 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import lotto.domain.Rank;
+import lotto.domain.rule.Rank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.provider.Arguments;
 
 public class Provider {
 
-    //각 등수가 한 번씩 당첨되도록 주입하는 argument
+    @DisplayName("모든 등수가 한 번씩 당첨되도록 설계된 더미객체")
     public static Stream<Arguments> numberArgumentsOfRank() {
         return Stream.of(
                 //Rank.FIFTH
@@ -25,6 +26,7 @@ public class Provider {
         );
     }
 
+    @DisplayName("당첨 통계와 예상 수익률을 제공하는 더미객체")
     public static Stream<Arguments> argumentsOfStatistics() {
         int purchaseAmount = 8_000;
 
@@ -54,6 +56,7 @@ public class Provider {
         );
     }
 
+    @DisplayName("등수 별 당첨된 횟수를 제공하는 더미 객체")
     public static Stream<Arguments> argumentsCountOfRank() {
         return Stream.of(
                 //1등: 1회, 2등: 1회, 5등 :1회

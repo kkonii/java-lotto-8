@@ -2,8 +2,8 @@ package lotto.dto.mapper;
 
 import java.util.EnumMap;
 import java.util.List;
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
+import lotto.domain.rule.Rank;
+import lotto.domain.vo.lotto.Lotto;
 import lotto.dto.LottoDto;
 import lotto.dto.StatisticDto;
 

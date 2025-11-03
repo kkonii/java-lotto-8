@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
+import lotto.domain.rule.Rank;
 
 public class StatisticCalculator {
 

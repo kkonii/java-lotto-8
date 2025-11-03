@@ -3,8 +3,11 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.domain.vo.lotto.Lotto;
+import lotto.domain.vo.winning.BonusNumber;
+import lotto.domain.vo.winning.WinningNumber;
 
-public class LottoCalculator {
+public class LottoMatcher {
 
     public int findMatchingCount(Lotto lotto, WinningNumber winningNumber) {
         List<Integer> lottoNumbers = lotto.asList();
@@ -25,7 +28,7 @@ public class LottoCalculator {
         return removeDuplicate;
     }
 
-    public boolean matchValuesOf(Lotto lotto, BonusNumber bonusNumber) {
+    public boolean containValueOf(Lotto lotto, BonusNumber bonusNumber) {
         List<Integer> lottoNumbers = lotto.asList();
         int numberValue = bonusNumber.getValue();
 

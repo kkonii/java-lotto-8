@@ -1,11 +1,11 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.BonusNumber;
-import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
-import lotto.domain.WinningNumber;
 import lotto.domain.vo.PurchaseAmount;
+import lotto.domain.vo.lotto.Lotto;
+import lotto.domain.vo.winning.BonusNumber;
+import lotto.domain.vo.winning.WinningNumber;
 import lotto.dto.LottoDto;
 import lotto.dto.StatisticDto;
 import lotto.dto.mapper.DtoMapper;
