@@ -15,12 +15,14 @@ public class InputView {
     }
 
     public String getWinningNumberInput() {
+        System.out.println();
         System.out.println(ENTER_WINNING_NUMBER);
 
         return Console.readLine();
     }
 
     public String getBonusInput() {
+        System.out.println();
         System.out.println(ENTER_BONUS_NUMBER);
 
         return Console.readLine();

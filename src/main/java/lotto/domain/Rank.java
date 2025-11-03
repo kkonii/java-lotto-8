@@ -43,4 +43,8 @@ public enum Rank {
     public int prizeMoney() {
         return prizeMoney;
     }
+
+    public int matchingCount() {
+        return matchingCount;
+    }
 }
