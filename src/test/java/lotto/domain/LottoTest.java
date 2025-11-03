@@ -35,4 +35,14 @@ class LottoTest {
                     .hasMessage(LottoError.OUT_OF_BOUNDS.messageOf(1, 45));
         }
     }
+
+    @Test
+    void 번호를_오름차순_정렬하여_반환한다() {
+        //given
+        Lotto lotto = new Lotto(List.of(12, 40, 1, 2, 8, 9));
+        //when
+        List<Integer> sortedNumbers = lotto.sortByAscending();
+        //then
+        Assertions.assertThat(sortedNumbers).containsExactly(1, 2, 8, 9, 12, 40);
+    }
 }

@@ -40,6 +40,12 @@ public class Lotto {
         }
     }
 
+    public List<Integer> sortByAscending() {
+        return numbers.stream()
+                .sorted()
+                .toList();
+    }
+
     public List<Integer> asList() {
         return List.copyOf(numbers);
     }
